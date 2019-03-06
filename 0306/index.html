@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+  <title>Document</title>
+  <script>
+      $(document).ready(function() {
+        console.log('the dom is ready');
+
+        var btn = document.getElementById('user-button');
+        var input = document.getElementById('input');
+
+        console.dir(btn);
+        btn.onclick = function() {
+          console.log('clicked button');
+
+          console.log(input.value);
+          $.get(`https://api.github.com/users/${input.value}`, function(data) {
+            console.log('data ', data);
+            var userDiv = document.getElementById('user-data');
+            console.log(userDiv);
+
+            createUserData(data);
+
+            userDiv.innerText = data.login;
+          });
+
+          function createUserData(data) {
+
+          }
+          console.log('after github call');
+        }
+
+
+  
+      });
+    
+    </script>
+
+</head>
+<body>
+  <main>
+    <input id='input' type="text">
+    <button id="user-button">Find</button>
+
+    <div id="user-data">
+    </div>
+  </main>
+</body>
+</html>
