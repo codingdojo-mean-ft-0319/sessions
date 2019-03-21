@@ -45,7 +45,7 @@ export class BookListComponent implements OnInit {
   onDelete(id: number) {
     console.log('deleting book', id);
     this.bookService.removeBook(id).subscribe(deletedBook => {
-      this.books = this.books.filter(book => book.id !== deletedBook.id);
+      this.books = this.books.filter(book => book._id !== deletedBook._id);
     });
   }
 

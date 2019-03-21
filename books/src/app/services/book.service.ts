@@ -9,7 +9,8 @@ import { Book } from '../models';
   providedIn: 'root'
 })
 export class BookService {
-  private readonly base = 'http://59498bce6d49df0011102cfc.mockapi.io/books';
+  // private readonly base = 'http://59498bce6d49df0011102cfc.mockapi.io/books';
+  private readonly base = '/api/books';
 
   constructor(private readonly http: HttpClient) {}
 
@@ -27,7 +28,7 @@ export class BookService {
   }
 
   updateBook(book: Book): Observable<Book> {
-    return this.http.put<Book>(`${this.base}/${book.id}`, book);
+    return this.http.put<Book>(`${this.base}/${book._id}`, book);
   }
 
   removeBook(id: number): Observable<Book> {
