@@ -3,6 +3,7 @@ const { Http } = require('@status/codes');
 
 module.exports = {
   login(request, response) {
+    console.log('logging in ', request.body);
     const { email, password } = request.body;
 
     User.findOne({ email })
@@ -25,6 +26,7 @@ module.exports = {
       });
   },
   register(request, response) {
+    console.log('register ', request.body);
     User.create(request.body)
       .then(user => {
         console.log(user);
@@ -40,7 +42,14 @@ module.exports = {
         response.status(Http.UnprocessableEntity).json(errors);
       });
   },
-  logout(request, response) {}
+  logout(request, response) {
+    request.session.destroy();
+
+    response.clearCookie('userID');
+    response.clearCookie('expiration');
+
+    response.json(true);
+  }
 };
 
 function completeLogin(request, response, user) {
